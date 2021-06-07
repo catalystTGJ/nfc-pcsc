@@ -60,13 +60,20 @@ modification of the package.json which includes a UUID library, and this "About 
 To execute this server simply type "npm run server" in a terminal window, while within the nfc-pcsc folder.
 
 To use this server, use a web browser to go to the following URL's from the same computer:
-http://127.0.0.1:8080/check
-http://127.0.0.1:8080/clear
-http://127.0.0.1:8080/read
-http://127.0.0.1:8080/write
-http://127.0.0.1:8080/writeover/?ti={7 byte tag ID expressed as 14 characters of HEX}
-http://127.0.0.1:8080/writeover/?ti=AUTO
-http://127.0.0.1:8080/pending
+
+1. http://127.0.0.1:8080/check
+
+2. http://127.0.0.1:8080/clear
+
+3. http://127.0.0.1:8080/read
+
+4. http://127.0.0.1:8080/write
+
+5. http://127.0.0.1:8080/writeover/?ti={7 byte tag ID expressed as 14 characters of HEX}
+
+6. http://127.0.0.1:8080/writeover/?ti=AUTO
+
+7. http://127.0.0.1:8080/pending
 
 "check" will return a value of 0 or 1.
 1 will be returned when the reader does not have a tag being currently read. (resting on it)
