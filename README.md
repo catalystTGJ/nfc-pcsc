@@ -26,6 +26,7 @@ This library uses pcsclite native bindings [pokusew/node-pcsclite](https://githu
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
+- [About this Fork](#about-this-fork)
 - [Installation](#installation)
 - [Flow of handling tags](#flow-of-handling-tags)
 - [Basic usage](#basic-usage)
@@ -51,6 +52,39 @@ This library uses pcsclite native bindings [pokusew/node-pcsclite](https://githu
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## About this Fork
+
+This is a forked copy of the nfc-pcsc, which contains a "ntag_rw_server.js" within a folder called server.
+At this time, the only modifications to the original source repo are the inclusion of the above folder/file,
+modification of the package.json which includes a UUID library, and this "About this Fork" section appended to the README.md file.
+To execute this server simply type "npm run server" in a terminal window, while within the nfc-pcsc folder.
+
+To use this server, use a web browser to go to the following URL's from the same computer:
+http://127.0.0.1:8080/check
+http://127.0.0.1:8080/clear
+http://127.0.0.1:8080/read
+http://127.0.0.1:8080/write
+http://127.0.0.1:8080/writeover/?ti={7 byte tag ID expressed as 14 characters of HEX}
+http://127.0.0.1:8080/writeover/?ti=AUTO
+http://127.0.0.1:8080/pending
+
+"check" will return a value of 0 or 1.
+1 will be returned when the reader does not have a tag being currently read. (resting on it)
+0 will be returned when the reader does have a tag being currently read.
+
+"clear" will always return 1, and basically means that it has set variables to "undefined" to clear out a previous pending action.
+
+"read" will return 1, when there is no pending action. This will mean that it has "set" the read/writer to perform a read action.
+"write" will return 1, when there is no pending action. This will mean that it has "set" the read/writer to perform a write action.
+"writeover" will return 1, when there is no pending action. This will mean that it has "set" the read/writer to perform a writeover action.
+Note: a writeover action requires that either ti= has a 14 character hexcode matching a particular tag's serial number, or the word "AUTO"
+has been passed in. Without this setting, writeover will not occur.
+
+All three actions "read", "write", "writeover" will return 0, when a pending action is already in place.
+
+"pending" will return 1, when there is a pending action, but no data has been returned yet for the pending action.
+data will be returned, when pending is called, and the action has already occurred.
+0 will be returned when there is no pending action.
 
 ## Installation
 
