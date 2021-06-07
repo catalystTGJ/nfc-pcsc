@@ -54,9 +54,25 @@ This library uses pcsclite native bindings [pokusew/node-pcsclite](https://githu
 
 ## About this Fork
 
+The goal of this project is to have a "local server" that provides an API to a web browser based "client" page.
+The "client" page will be sourced from a separate project, which will communicate with both a back-end and this local server instance.
+In this way, the "client" is acting like a bridge between the two servers. The "client" will pass parameters to the local server to
+configure its behavior as it processes NTAG213 or NTAG215 items that are presented to it. Eventually, the local server will be provided with an
+appropriate URL prefix and domain. Currently, this is hardcoded. The local server will then process the "write" actions by producing a
+unique signature that will be composed of the tag's 7 byte serial number, presented as 14 character HEX code, AND a 16 byte UUIDv4 random code,
+presented as a 32 character HEX code. When the two ID's are combined, this will produce a 23 byte unique identifcation number, which
+should prevent any duplication in the back-end server's records. The ultimate purpose of the encoded tag is to provide a means to a smartphone
+or tablet that is equiped with 13.56mhz NFC component. iPhone's of version 7 or higher should have the feature, though some models do not
+support background scanning. Starting at version 10, background scanning of "well known" tags is supported.
+
+Note: Setting a tag with "http://www." or "https://www.", values 1 and 2 respectively, does not work with brackground sscanning on the iPhone.
+To support background scanning, it is best to use a value of 3 or 4, which is "http://" and "https://" respectively.
+
 This is a forked copy of the nfc-pcsc, which contains a "ntag_rw_server.js" within a folder called server.
 At this time, the only modifications to the original source repo are the inclusion of the above folder/file,
 modification of the package.json which includes a UUID library, and this "About this Fork" section appended to the README.md file.
+
+To install this project simply clone the project, and then type "npm install" in a terminal window, while within the nfc-pcsc folder.
 To execute this server simply type "npm run server" in a terminal window, while within the nfc-pcsc folder.
 
 To use this server, use a web browser to go to the following URL's from the same computer:
@@ -69,7 +85,7 @@ To use this server, use a web browser to go to the following URL's from the same
 
 4. http://127.0.0.1:8080/write
 
-5. http://127.0.0.1:8080/writeover/?ti={7 byte tag ID expressed as 14 characters of HEX}
+5. http://127.0.0.1:8080/writeover/?ti= (7 byte tag ID expressed as 14 characters of HEX)
 
 6. http://127.0.0.1:8080/writeover/?ti=AUTO
 
