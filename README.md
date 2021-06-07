@@ -65,7 +65,7 @@ should prevent any duplication in the back-end server's records. The ultimate pu
 or tablet that is equiped with 13.56mhz NFC component. iPhone's of version 7 or higher should have the feature, though some models do not
 support background scanning. Starting at version 10, background scanning of "well known" tags is supported.
 
-Note: Setting a tag with "http://www." or "https://www.", values 1 and 2 respectively, does not work with brackground sscanning on the iPhone.
+Note: Setting a tag with "http://www." or "https://www.", values 1 and 2 respectively, does not work with brackground scanning on the iPhone.
 To support background scanning, it is best to use a value of 3 or 4, which is "http://" and "https://" respectively.
 
 This is a forked copy of the nfc-pcsc, which contains a "ntag_rw_server.js" within a folder called server.
