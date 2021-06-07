@@ -62,7 +62,11 @@ appropriate URL prefix and domain. Currently, this is hardcoded. The local serve
 unique signature that will be composed of the tag's 7 byte serial number, presented as 14 character HEX code, AND a 16 byte UUIDv4 random code,
 presented as a 32 character HEX code. When the two ID's are combined, this will produce a 23 byte unique identifcation number, which
 should prevent any duplication in the back-end server's records. The ultimate purpose of the encoded tag is to provide a means to a smartphone
-or tablet that is equiped with 13.56mhz NFC component. iPhone's of version 7 or higher should have the feature, though some models do not
+or tablet that is equiped with 13.56mhz NFC component, to reach a URL which will then be processed by a "Redirection" back-end server, that will
+then look-up the tag's unique ID and unqiue UUID. When the record exists, the server will redirect the client to the appropriate URL that is
+bonded to the record.
+
+iPhone's of version 7 or higher should have the feature, though some models do not
 support background scanning. Starting at version 10, background scanning of "well known" tags is supported.
 
 Note: Setting a tag with "http://www." or "https://www.", values 1 and 2 respectively, does not work with brackground scanning on the iPhone.
