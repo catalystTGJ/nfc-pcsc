@@ -10,7 +10,7 @@
 // #############
 
 import { NFC, TAG_ISO_14443_3, TAG_ISO_14443_4, KEY_TYPE_A, KEY_TYPE_B } from '../src/index';
-import pretty from './pretty-logger';
+import pretty from '../examples/pretty-logger';
 
 const url_prefix_list = [
 	"N/A",
@@ -58,8 +58,6 @@ const ntag_atr = [0x3b, 0x8f, 0x80, 0x01, 0x80, 0x4f, 0x0c, 0xa0, 0x00, 0x00, 0x
 const expected_url_blank_tag = "70.124.172.205:8200/ntag_check/?ti=00000000000000&ui=00000000000000000000000000000000"
 
 const nfc = new NFC(); // const nfc = new NFC(pretty); // optionally you can pass logger to see internal debug logs
-
-var url_prefix = "not present";
 
 const uuid = require('uuid');
 const http = require('http');
@@ -150,6 +148,7 @@ nfc.on('reader', async reader => {
 				// copy card object to global object ntag, for accessing from web server object
 				ntag = card;
 
+				var url_prefix = "";
 				var url_string = "";
 				var current_tag = false
 				var write_ready = false
@@ -268,8 +267,6 @@ nfc.on('reader', async reader => {
 	});
 
 	reader.on('card.off', card => {
-		url_prefix = "not present";
-		url_string = "";
 		ntag = undefined;
 		pretty.info(`item removed `, reader);
 	});
